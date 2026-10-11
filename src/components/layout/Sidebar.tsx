@@ -79,9 +79,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Quick Launch Button */}
         <button
           onClick={onOpenNewProjectModal}
-          className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 hover:from-cyan-500/30 hover:to-indigo-500/30 text-cyan-300 border border-cyan-500/30 text-xs font-semibold transition-all group shadow-sm"
+          className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-xs font-semibold transition-all group shadow-sm cursor-pointer"
         >
-          <PlusCircle className="w-4 h-4 text-cyan-400 group-hover:rotate-90 transition-transform duration-300" />
+          <PlusCircle className="w-4 h-4 text-emerald-400 group-hover:rotate-90 transition-transform duration-300" />
           <span>New Project</span>
         </button>
 

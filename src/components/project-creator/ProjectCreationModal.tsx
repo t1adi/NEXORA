@@ -461,16 +461,70 @@ export const ProjectCreationModal: React.FC<ProjectCreationModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                  Project Description & Vision
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                    Project Description & Vision
+                  </label>
+                  <span className="text-[11px] text-slate-400">Describe features & architecture</span>
+                </div>
                 <textarea
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe your website or application in detail: primary features, user workflows, target audience, key interactions..."
-                  className="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                  className="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                 />
+
+                {/* Example Quick-Pick Prompts */}
+                <div className="mt-2 space-y-1.5">
+                  <span className="text-[11px] text-slate-400">Popular starter prompts:</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      {
+                        label: 'DevSecOps Incident Console',
+                        title: 'DevSecOps Incident Response Console',
+                        type: 'Dashboard' as const,
+                        desc: 'Real-time DevSecOps Incident Console with live telemetry stream, vulnerability scans, audit logs, and status monitors.',
+                        reqs: 'Websocket logs, severity filter, action modals, CSV export',
+                      },
+                      {
+                        label: 'E-Commerce Storefront',
+                        title: 'Modern E-Commerce Storefront',
+                        type: 'E-commerce' as const,
+                        desc: 'Full-featured modern e-commerce storefront with catalog search, faceted filter, shopping cart drawer, and responsive checkout.',
+                        reqs: 'Product gallery, cart state, category filters, responsive drawer',
+                      },
+                      {
+                        label: 'Crypto Trading Terminal',
+                        title: 'ApexTrade Crypto Terminal',
+                        type: 'Web App' as const,
+                        desc: 'Predictive high-frequency cryptocurrency order book terminal with interactive candlesticks, depth chart, and portfolio ledger.',
+                        reqs: 'Interactive price charts, order book, simulated buy/sell, position tracking',
+                      },
+                      {
+                        label: 'AI Multi-Agent Studio',
+                        title: 'AI Multi-Agent Directed Canvas',
+                        type: 'SaaS Product' as const,
+                        desc: 'Collaborative AI multi-agent node canvas with directed acyclic execution graph, step inspector, and real-time execution trace.',
+                        reqs: 'Draggable canvas nodes, connection lines, model inspector, JSON import/export',
+                      },
+                    ].map((sample) => (
+                      <button
+                        key={sample.label}
+                        type="button"
+                        onClick={() => {
+                          setName(sample.title);
+                          setType(sample.type);
+                          setDescription(sample.desc);
+                          setFunctionalReqs(sample.reqs);
+                        }}
+                        className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500/40 hover:text-emerald-300 text-slate-400 text-[11px] transition-colors cursor-pointer"
+                      >
+                        + {sample.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -911,14 +965,24 @@ export const ProjectCreationModal: React.FC<ProjectCreationModalProps> = ({
             </button>
 
             {step === 'details' && (
-              <button
-                type="button"
-                onClick={() => setStep('tech')}
-                className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs flex items-center gap-1.5 transition-all shadow-md shadow-emerald-600/20"
-              >
-                <span>Configure Stack</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => setStep('tech')}
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs flex items-center gap-1.5 transition-all border border-slate-700 cursor-pointer"
+                >
+                  <span>Customize Stack</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleGeneratePlan}
+                  className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-semibold text-xs flex items-center gap-1.5 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Synthesize Plan →</span>
+                </button>
+              </>
             )}
 
             {step === 'tech' && (
